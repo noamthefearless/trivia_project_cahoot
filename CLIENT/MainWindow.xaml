@@ -1,0 +1,412 @@
+﻿<Window x:Class="CLIENT.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CLIENT"
+        mc:Ignorable="d"
+        Title="MainWindow" WindowState="Maximized" WindowStyle="None" HorizontalAlignment="Center" VerticalAlignment="Center">
+    <!--
+    this is the main grid
+    -->
+    <Grid Name="Grid">
+        <!--
+        this next button is the quit button
+        -->
+        <Button Name="QuitButton" Width="112" Height="90" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,0,0" Background="Transparent" BorderBrush="Transparent" Click="Quit" Visibility="Visible">
+            <Image Source="Assets/Quit.png"></Image>
+        </Button>
+
+
+        <Button Name="ToggleSound" Width="75" Height="75" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,25,40,0" Background="Transparent" BorderBrush="Transparent" Click="ToggleSoundButton" Visibility="Collapsed">
+            <Image Name ="ToggleSoundImage" Source="Assets/PlaySong.png" Visibility="Visible" Width="75"/>
+        </Button>
+
+        <!--
+        the login grid
+        -->
+        <Grid Name="LoginGrid" Visibility="Visible">
+            <!--
+            main message
+            -->
+            <TextBlock Name="LoginOrSignUpMsg" Text="         Login" FontSize="60" Width="523" Height="125" VerticalAlignment="Top" HorizontalAlignment="Center" TextAlignment="Left" FontWeight="Black" FontStyle="Oblique" Margin="0,109,0,0" Foreground="Blue"/>
+            <!--
+            username input and indicator
+            -->
+            <TextBlock Text="username:" FontSize="25" FontWeight="Black" Foreground="Blue" FontStyle="Oblique" Margin="262,231,400,127"/>
+            <TextBox Name="usernameInput" Width="400" Height="35" Margin="10,109,363,256" FontSize="20" FontWeight="Heavy"/>
+            <!--
+            password input and indicator
+            -->
+            <TextBlock Text="password:" FontSize="25" FontWeight="Black" Foreground="Blue" FontStyle="Oblique" Margin="262,380,400,0" Height="44" VerticalAlignment="Top"/>
+            <PasswordBox Name="passwordInput" Width="400" Height="35" Margin="24,256,376,109" FontSize="20" FontWeight="Heavy"/>
+            <!--
+            email input and indicator
+            -->
+            <TextBlock Name ="EmailIndicator" Text="email:" FontSize="25" FontWeight="Black" Foreground="Blue" FontStyle="Oblique" Margin="262,530,400,0" Height="44" VerticalAlignment="Top" Visibility="Collapsed"/>
+            <TextBox Name="emailInput" Width="400" Height="35" Margin="24,407,376,-37" FontSize="20" FontWeight="Heavy" Visibility="Collapsed"/>
+            <!--
+            the next 2 buttons are the one to preform the login or sign up, and the one to switch states
+            -->
+            <Button Name="LoginAndSignUpButton" Width="180" Height="81" Margin="575,0,0,150" Background="Transparent" BorderBrush="Transparent" Click="LoginOrSIgnUp">
+                <Image Name="loginOrSignUpPic" Source="Assets/Login.png" Stretch="Fill"></Image>
+            </Button>
+            <Button Name="isLoginButton" Width="200" Height="81" Margin="600,100,0,0" Content="Click here &#13;&#10;to create an account" FontSize="20" FontWeight="Bold" Foreground="DarkSlateBlue" Background="Transparent" BorderBrush="Transparent" Click="LoginOrSignUpChoice"/>
+            <TextBlock Name="ErrorLine" Height="200" Margin="500,352,-31,-128" Text="" FontSize="20" FontWeight="ExtraBlack" Foreground="Crimson" TextAlignment="Center" FontStyle="Oblique"/>
+            
+        </Grid>
+        <!-- end of grid
+        -->
+
+
+        <!--
+        this grid will be the menu grid
+        -->
+        <Grid Name="MenuGrid" Visibility="Collapsed" Margin="0,0,-21,-39">
+            <!--
+            the image of the Cahoot!
+            -->
+            <Image Source="Assets/cahoot.png" Width="800" Height="240" HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Visible" Margin="0,30,0,0"></Image>
+            <!--
+            the logout buuton: will preform logout upon click
+            -->
+            <Button Name="LogoutButton" Width="120" Height="50" Background="Transparent" BorderBrush="Transparent" Margin="0,0,900,640" Click="Logout">
+                <Image Name="LogoutButtonImage" Source="Assets/Logout.png"/>
+            </Button>
+            <!--
+            createRoom button: will move you to the create room grid upon click
+            -->
+            <Button Name="CreateRoomButton" Width="350" Height="120" Background="Transparent" BorderBrush="Transparent" Margin="225,-50,225,80" Click="GoToCreateRoom">
+                <Image Name="CreateRoomButtonImage" Source="Assets/Create Room.png" Stretch="Fill"/>
+            </Button>
+            <!--
+              joinRoom button: will move you to the join room grid upon click
+            -->
+            <Button Name="JoinRoomButton" Width="350" Height="120" Background="Transparent" BorderBrush="Transparent" Margin="225,250,225,80" Click="GoToJoinRoom">
+                <Image Name="JoinRoomButtonImage" Source="Assets/Join Room.png" Stretch="Fill"/>
+            </Button>
+            <!--
+             Statistics button: will move you to the statistics grid upon click
+            -->
+            <Button Name="StatisticsButton" Width="350" Height="120" Background="Transparent" BorderBrush="Transparent" Margin="225,550,225,80" Click="GoToStatistics">
+                <Image Name="StatisticsButtonImage" Source="Assets/Statistics.png" Stretch="Fill"/>
+            </Button>
+        </Grid>
+
+        <!--
+            this grid will be the statistics screens
+            -->
+        <Grid Name="StatisticsGrid" Visibility="Collapsed" Margin="0,0,0,0">
+            <!--
+            this textbox will will display your personal stats
+            -->
+            <TextBlock Width="850" Height="600" Name="personalStats" Text="ERROR" Margin="-50,100,0,0" FontSize="50" FontWeight="Bold" Foreground="Blue" FontStyle="Oblique" TextAlignment="Center" Visibility="Visible"/>
+            <!--
+                this is the return to menu button
+            -->
+            <Button Name="ReturnToMenuFromStats" Width="350" Height="120" Background="Transparent" BorderBrush="Transparent" Margin="0,550,900,0" Click="ReturnToMenu">
+                <Image Name="ReturnToMenuFromStatsImage" Source="Assets/returnToMenu.png" Stretch="Fill"/>
+            </Button>
+            <!--
+            this is the data grid. it took me soooooo long to make it. it will display the 5 highst scores and users
+            -->
+            <ScrollViewer Name="HighScoresTableScroller" Width="800" Height="600" VerticalScrollBarVisibility="Disabled" Visibility="Collapsed">
+                <DataGrid Name="HighScoresTable" AutoGenerateColumns="False" ColumnWidth="Auto" RowHeight="60" IsReadOnly="True" Visibility="Collapsed" Margin="0,0,0,0" Background="Transparent" BorderBrush="Transparent" ColumnHeaderHeight="60" FontSize="20" Foreground="Blue" TextBlock.TextAlignment="Left" TextBlock.FontWeight="Black" TextBlock.FontStretch="Normal" TextBlock.FontStyle="Oblique" CanUserResizeRows="False" CanUserResizeColumns="False" CanUserSortColumns="False" VerticalAlignment="Center" HorizontalAlignment="Center" RowBackground="Gold">
+                    <!--
+                     apperently this is the only way to make the columns fill the grid
+                    -->
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="User Name" Binding="{Binding userName}"/>
+                        <DataGridTextColumn Header="Score" Binding="{Binding score}" />
+                        <DataGridTextColumn Header="Correct Answers" Binding="{Binding correctAns}"/>
+                        <DataGridTextColumn Header="Total Answers" Binding="{Binding totalAns}" />
+                        <DataGridTextColumn Header="Total Games" Binding="{Binding totalGames}" />
+                        <DataGridTextColumn Header="Average Time" Binding="{Binding avgTime}" />
+                    </DataGrid.Columns>
+
+                </DataGrid>
+
+
+            </ScrollViewer>
+            <!--
+            this button will switch between the table and the personal stats
+            -->
+            <Button Name="switchBetweenPersonalStatsAndHighScores" Width="350" Height="120" Background="Transparent" BorderBrush="Transparent" Margin="900,550,0,0" Click="PersonalStatsOrHighScoresChoice">
+                <Image Name="switchBetweenPersonalStatsAndHighScoresImage" Source="Assets/High scores.png" Stretch="Fill"/>
+            </Button>
+            <!--
+            these are just decorations
+            -->
+            <Image Source="/Assets/BullsEyeDecor.png" Width="200" Height="200" Margin="0,0,1000,0" Name="StatsDecor1"/>
+            <Image Source="/Assets/BullsEyeDecor.png" Width="200" Height="200" Margin="1050,0,0,0" Name="StatsDecor2"/>
+        </Grid>
+
+        <!--
+        This greed will show all the rooms disponible
+        -->
+        <Grid Name="JoinRoomGrid" Margin="0" Visibility="Collapsed">
+            <!--
+            an indicator
+            -->
+            <TextBlock Width="850" Height="600" Text="Rooms" Margin="-50,-70,0,0" FontSize="50" FontWeight="Bold" Foreground="Blue" FontStyle="Oblique" TextAlignment="Center"/>
+            <!--
+            a datagrid in a scroll viewer so that you can always see all of the rooms
+            -->
+            <ScrollViewer Name="RoomsTableScroller" Width="900" Height="400" VerticalScrollBarVisibility="Disabled" Margin="0,0,0,100">
+                <DataGrid Name="AllRoomsTable" AutoGenerateColumns="False" Width="900" Height="400" ColumnWidth="Auto" RowHeight="60" IsReadOnly="True" Margin="0,0,0,0" 
+                      Background="Transparent" BorderBrush="Transparent" ColumnHeaderHeight="60" FontSize="20" Foreground="Blue" TextBlock.TextAlignment="Left" 
+                      TextBlock.FontWeight="Black" TextBlock.FontStretch="Normal" TextBlock.FontStyle="Oblique" CanUserResizeRows="False" 
+                      CanUserResizeColumns="False" CanUserSortColumns="False" VerticalAlignment="Center" HorizontalAlignment="Center" RowBackground="Gold">
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="id" Binding="{Binding id}"/>
+                        <DataGridTextColumn Header="name" Binding="{Binding name}"/>
+                        <DataGridTextColumn Header="maxPlayers" Binding="{Binding maxPlayers}"/>
+                        <DataGridTextColumn Header="currNumOfPlayers" Binding="{Binding currNumOfPlayers}"/>
+                        <DataGridTextColumn Header="numOfQuestionsInGame" Binding="{Binding numOfQuestionsInGame}"/>
+                        <DataGridTextColumn Header="timePerQuestion" Binding="{Binding timePerQuestion}"/>
+                        <DataGridTextColumn Header="difficulty" Binding="{Binding difficultyStr}"/>
+                        <DataGridTextColumn Header="category" Binding="{Binding categoryStr}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </ScrollViewer>
+            <!--
+            return to menu button
+            -->
+            <Button Name="ReturnToMenuFromJoinRoom" Width="350" Height="120" Background="Transparent" BorderBrush="Transparent" Margin="0,550,900,0" Click="ReturnToMenu">
+                <Image Name="ReturnToMenuFromJoinROomImage" Source="Assets/returnToMenu.png" Stretch="Fill"/>
+            </Button>
+
+            <!--
+            an indicator and box, so that the user can enter the id of the room they want to be in
+            -->
+            <TextBlock Name="roomIdIndicator" Margin="-250,500,0,0" Width="200" Height="35" Text="Room ID:" FontSize="30" FontWeight="Black" Foreground="Blue" TextAlignment="Center" FontStyle="Oblique"/>
+            <TextBox Name="IdTextBox" Height="35" Width="400" FontSize="20" FontWeight="Heavy" Margin="-25,600,0,0"/>
+            <TextBlock Name="JoinRoomErrorLine" Width="400" Height="35" Margin="0,400,0,0" FontSize="20" FontWeight="ExtraBlack" Foreground="Crimson" TextAlignment="Center" FontStyle="Oblique"/>
+            <!--
+            join into a room
+            -->
+            <Button Name="JoinRoom" Width="350" Height="120" Background="Transparent" BorderBrush="Transparent"  Click="JoinIntoRoom" Margin="900,550,0,0">
+                <Image Source="Assets/Join Room.png" Stretch="Fill"/>
+            </Button>
+
+
+
+        </Grid>
+
+
+        <Grid Name="CreateRoomGrid" Visibility="Collapsed" Margin="0,0,0,0">
+            <!--
+            the return to menu button
+            -->
+            <Button Name="ReturnToMenuFromCreateRoom" Width="350" Height="120" Background="Transparent" BorderBrush="Transparent" Margin="0,550,900,0" Click="ReturnToMenu">
+                <Image Name="ReturnToMenuFromCreateRoomImage" Source="Assets/returnToMenu.png" Stretch="Fill"/>
+            </Button>
+            <!--
+            this button will create the message to send
+            -->
+            <Button Name="CreateNewRoomButton" Width="350" Height="120" Background="Transparent" BorderBrush="Transparent" Margin="900,550,0,0" Click="CreateNewRoom">
+                <Image Name="CreateNewRoomButtonImage" Source="Assets/CreateNewRoom.png" Stretch="Fill"/>
+            </Button>
+            <!--
+            the indicators
+            -->
+            <TextBlock Name="difficultyIndicator" Height="50" Width="250" Text="Difficulties:" FontSize="40" FontWeight="Black" Foreground="Blue" Margin="0,0,750,450" FontStyle="Oblique"/>
+            <TextBlock Name="categoryIndicator" Height="55" Width="250" Text="Categories:" FontSize="40" FontWeight="Black" Foreground="Blue" Margin="500,0,0,450" FontStyle="Oblique"/>
+            <!--
+            these are all of the checkBoxes
+            -->
+            <CheckBox Name="IsEasy" Width="50" Height="15" Content="Easy" FontStyle="Oblique" Foreground="Blue" FontWeight="Black" Margin="0,0,850,300">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform ScaleX="3" ScaleY="3"/>
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+            <CheckBox Name="IsMedium" Width="70" Height="15" Content="Medium" FontStyle="Oblique" Foreground="Blue" FontWeight="Black" Margin="0,0,790,100">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform ScaleX="3" ScaleY="3"/>
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+            <CheckBox Name="IsHard" Width="50" Height="15" Content="Hard" FontStyle="Oblique" Foreground="Blue" FontWeight="Black" Margin="0,0,850,-100">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform ScaleX="3" ScaleY="3"/>
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+            <CheckBox Name="IsFilms" Width="55" Height="15" Content="Films" FontStyle="Oblique" Foreground="Blue" FontWeight="Black" Margin="0,0,-850,300">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform ScaleX="3" ScaleY="3"/>
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+            <CheckBox Name="IsVideoGames" Width="100" Height="15" Content="Video Games" FontStyle="Oblique" Foreground="Blue" FontWeight="Black" Margin="0,0,-330,300">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform ScaleX="3" ScaleY="3"/>
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+            <CheckBox Name="IsTelevision" Width="83" Height="15" Content="Television" FontStyle="Oblique" Foreground="Blue" FontWeight="Black" Margin="0,0,-280,150">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform ScaleX="3" ScaleY="3"/>
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+            <CheckBox Name="IsHistory" Width="67" Height="15" Content="History" FontStyle="Oblique" Foreground="Blue" FontWeight="Black" Margin="0,0,-890,150">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform ScaleX="3" ScaleY="3"/>
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+            <CheckBox Name="IsMythology" Width="85" Height="15" Content="Mythology" FontStyle="Oblique" Foreground="Blue" FontWeight="Black" Margin="0,0,-290,0">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform ScaleX="3" ScaleY="3"/>
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+            <CheckBox Name="IsSports" Width="85" Height="15" Content="Sports" FontStyle="Oblique" Foreground="Blue" FontWeight="Black" Margin="0,0,-945,0">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform ScaleX="3" ScaleY="3"/>
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+            <CheckBox Name="IsGeneralKnowledge" Width="137" Height="15" Content="General Knowledge" FontStyle="Oblique" Foreground="Blue" FontWeight="Black" Margin="0,0,-449,-150">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform ScaleX="3" ScaleY="3"/>
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+            <!--
+            these are the display of the max number of players, the question count, and the time for each question
+            -->
+            <TextBlock Name="numberOfPlayersDisplay" Width="200" Height="80" FontSize="30" FontWeight="Black" Foreground="Blue" TextAlignment="Center" Margin="0,330,700,0"/>
+            <TextBlock Name="numberOfQuestionDisplay" Width="230" Height="80" FontSize="30" FontWeight="Black" Foreground="Blue" TextAlignment="Center" Margin="25,330,0,0"/>
+            <TextBlock Name="numberOfSecondsPerQuestionDisplay" Width="210" Height="80" FontSize="30" FontWeight="Black" Foreground="Blue" TextAlignment="Center" Margin="800,330,0,0"/>
+            <!--
+                these 6 buttons will increase and decrease the different values in the diplays
+            -->
+            <Button Name="numOfPlayersInc" Width="30" Height="30" Background="Transparent" BorderBrush="Transparent" Margin="0,310,470,0" Click="incMaxPlayers">
+                <Image Source="Assets/Plus.png" Stretch="Fill"/>
+            </Button>
+            <Button Name="numOfPlayersDec" Width="30" Height="30" Background="Transparent" BorderBrush="Transparent" Margin="0,310,930,0" Click="decMaxPlayers">
+                <Image Source="Assets/Minus.png" Stretch="Fill"/>
+            </Button>
+            <Button Name="numOfQuestionsInc" Width="30" Height="30" Background="Transparent" BorderBrush="Transparent" Margin="0,310,-300,0" Click="incQuestionNum">
+                <Image Source="Assets/Plus.png" Stretch="Fill"/>
+            </Button>
+            <Button Name="numOfQuestionsDec" Width="30" Height="30" Background="Transparent" BorderBrush="Transparent" Margin="0,310,240,0" Click="decQuestionNum">
+                <Image Source="Assets/Minus.png" Stretch="Fill"/>
+            </Button>
+            <Button Name="numOfSecondsPerQuestionInc" Width="30" Height="30" Background="Transparent" BorderBrush="Transparent" Margin="0,310,-1040,0" Click="incQuestionTime">
+                <Image Source="Assets/Plus.png" Stretch="Fill"/>
+            </Button>
+            <Button Name="numOfSecondsPerQuestionDec" Width="30" Height="30" Background="Transparent" BorderBrush="Transparent" Margin="0,310,-560,0" Click="decQuestionTime">
+                <Image Source="Assets/Minus.png" Stretch="Fill"/>
+            </Button>
+            <TextBlock Name="roomNameIndicator" Margin="-250,500,0,0" Width="200" Height="35" Text="Room name:" FontSize="30" FontWeight="Black" Foreground="Blue" TextAlignment="Center" FontStyle="Oblique"/>
+            <TextBox Name="roomNameInput" Height="35" Width="400" FontSize="20" FontWeight="Heavy" Margin="-25,600,0,0"/>
+            <TextBlock Name="CreateRoomErrorLine" Width="400" Height="35" Margin="0,0,0,580" FontSize="20" FontWeight="ExtraBlack" Foreground="Crimson" TextAlignment="Center" FontStyle="Oblique"/>
+        </Grid>
+
+        <!--
+        the waiting room grid willbe activated once you entered into a waiting room
+        -->
+        <Grid Name="WaitingRoomGrid" Visibility="Collapsed" Margin="0,0,0,0">
+            <!--
+            the return to menu button to exit the room
+            -->
+            <Button Name="ReturnToMenuFromWaitingRoom" Width="350" Height="120" Background="Transparent" BorderBrush="Transparent" Margin="0,550,900,0" Click="ReturnToMenu">
+                <Image Name="ReturnToMenuFromWaitingRoomImage" Source="Assets/LeaveRoom.png" Stretch="Fill"/>
+            </Button>
+            <!--
+            this button will begin the game
+            -->
+            <Button Name="BeginGameButton" Width="350" Height="120" Background="Transparent" BorderBrush="Transparent" Margin="900,550,0,0" Click="BeginGame">
+                <Image Name="BeginGameImage" Source="Assets/BeginGame.png" Stretch="Fill"/>
+            </Button>
+            <!--
+            these 3 blocks will display information
+            -->
+            <TextBlock Name="RoomState" Margin="0,0,50,0" Width ="900" Height="400" Text="" TextAlignment="Center" FontSize="35" FontWeight="Black" Foreground="Blue" FontStyle="Oblique"/>
+            <TextBlock Name="WaitingRoomTitle"  Width="850" Height="600" Text="Waiting for the Admin&#10;to start the game" Margin="-50,-70,0,0" FontSize="35" FontWeight="Bold" Foreground="Blue" FontStyle="Oblique" TextAlignment="Center"/>
+            <TextBlock Name="CountDownToGame" Width="400" Height="400" Margin="0,0,0,0" FontSize="250" Text="" TextAlignment="Center" FontStyle="Oblique" Foreground="Blue" FontWeight="Black"/>
+            
+            
+        </Grid>
+        <!--
+        this grid will show the questions
+        -->
+        <Grid Name="GameGrid" Visibility="Collapsed" Margin="0,0,0,0">
+            <!--
+            a button to exit the game
+            -->
+            <Button Name="LaveGameButton" Width="180" Height="70" Background="Transparent" BorderBrush="Transparent" Margin="0,0,820,630" Click="LaveGame">
+                <Image Name="LeaveGameImage" Source="Assets/Leave Game.png" Stretch="Fill"/>
+            </Button>
+            <!--
+            these next 4 buttons are the answer buttons
+            -->
+            <Button Name="answer1button" Width="300" Height="130" Click="answer1button_Click" IsEnabled="True" Background="Transparent" BorderBrush="Transparent" Margin="0,450,450,0">
+                <Grid>
+                    <Image Name="answer1buttonImage" Source="Assets/emptyButton.png" Stretch="Fill" Visibility="Visible" Margin="0,0,0,0"/>
+                    <TextBlock Name="answer1buttonText" TextWrapping="Wrap" Text="" TextAlignment="Center" Margin="5,48,7,0" FontSize="28" Grid.ZIndex="1" VerticalAlignment="Top" FontWeight="Black" Foreground="Black" FontStyle="Oblique" Height="72" Background="Transparent"/>
+                </Grid>
+            </Button>
+            <Button Name="answer2button" Click="answer2button_Click" Width="300" Height="130" IsEnabled="True" Background="Transparent" BorderBrush="Transparent" Margin="0,100,450,0">
+                <Grid>
+                    <Image Name="answer2buttonImage" Source="Assets/emptyButton.png" Stretch="Fill" Visibility="Visible" Margin="0,0,0,0"/>
+                    <TextBlock Name="answer2buttonText" TextWrapping="Wrap" Text="" TextAlignment="Center" Margin="5,48,7,0" FontSize="28" Grid.ZIndex="1" VerticalAlignment="Top" FontWeight="Black" Foreground="Black" FontStyle="Oblique" Height="72" Background="Transparent"/>
+                </Grid>
+            </Button>
+            <Button Name="answer3button" Width="300" IsEnabled="True" Click="answer3button_Click" Height="130" Background="Transparent" BorderBrush="Transparent" Margin="0,100,-450,0">
+                <Grid>
+                    <Image Name="answer3buttonImage" Source="Assets/emptyButton.png" Stretch="Fill" Visibility="Visible" Margin="0,0,0,0"/>
+                    <TextBlock Name="answer3buttonText" TextWrapping="Wrap" Text="" TextAlignment="Center" Margin="5,48,7,0" FontSize="28" Grid.ZIndex="1" VerticalAlignment="Top" FontWeight="Black" Foreground="Black" FontStyle="Oblique" Height="72" Background="Transparent"/>
+                </Grid>
+            </Button>
+            <Button Name="answer4button" Width="300" IsEnabled="True" Click="answer4button_Click" Height="130" Background="Transparent" BorderBrush="Transparent" Margin="0,450,-450,0">
+                <Grid>
+                    <Image Name="answer4buttonImage" Source="Assets/emptyButton.png" Stretch="Fill" Visibility="Visible" Margin="0,0,0,0"/>
+                    <TextBlock Name="answer4buttonText" TextWrapping="Wrap" Text="" TextAlignment="Center" Margin="5,48,7,0" FontSize="28" Grid.ZIndex="1" VerticalAlignment="Top" FontWeight="Black" Foreground="Black" FontStyle="Oblique" Height="72" Background="Transparent"/>
+                </Grid>
+            </Button>
+            <!--
+            these next blocks will show information such as the number of question, the category and difficulty, the question itself, and the time left
+            -->
+            <TextBlock Name="QuestionShower" Width="550"  Text="question" Height="270" Margin="0,0,0,280" FontSize="35" FontWeight="Black" Foreground="Blue" TextAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
+            <TextBlock Name="timeIndiCator" Width="300" Height="50" TextAlignment="Center" FontSize="27" Text="Time Left:" Foreground="Blue" FontStyle="Oblique" FontWeight="Black" Margin="0,0,950,400"/>
+            <TextBlock Name="timeHolder" Width="80" Height="60" TextAlignment="Center" FontSize="50" Text="60" Foreground="Blue" FontStyle="Oblique" FontWeight="Black" Margin="0,0,950,300"/>
+            <TextBlock Name="QuestionNumberIndiCator" Width="250" Height="40" TextAlignment="Center" FontSize="27" Text="Questions Left:" Foreground="Blue" FontStyle="Oblique" FontWeight="Black" Margin="0,0,-1000,480"/>
+            <TextBlock Name="QuestionNumberHolder" Width="110" Height="40" TextAlignment="Center" FontSize="27" Text="14/60" Foreground="Blue" FontStyle="Oblique" FontWeight="Black" Margin="0,0,-1000,380"/>
+            <TextBlock Name="QuestionDifficultyIndiCator" Width="250" Height="40" TextAlignment="Center" FontSize="27" Text="Difficulty:" Foreground="Blue" FontStyle="Oblique" FontWeight="Black" Margin="0,0,-1000,240"/>
+            <TextBlock Name="QuestionDifficultyHolder" Width="120" Height="40" TextAlignment="Center" FontSize="27" Text="Hard" Foreground="Blue" FontStyle="Oblique" FontWeight="Black" Margin="0,0,-1000,140"/>
+            <TextBlock Name="StreakIndiCator" Width="250" Height="40" TextAlignment="Center" FontSize="27" Text="Streak:" Foreground="Blue" FontStyle="Oblique" FontWeight="Black" Margin="0,0,-1000,0"/>
+            <TextBlock Name="StreakHolder" Width="120" Height="40" TextAlignment="Center" FontSize="27" Text="10" Foreground="Blue" FontStyle="Oblique" FontWeight="Black" Margin="0,0,-1000,-100"/>
+            <TextBlock Name="pointIndicatorIndiCator" Width="250" Height="40" TextAlignment="Center" FontSize="27" Text="Points:" Foreground="Blue" FontStyle="Oblique" FontWeight="Black" Margin="0,0,-1000,-240"/>
+            <TextBlock Name="pointsHolder" Width="120" Height="40" TextAlignment="Center" FontSize="27" Text="" Foreground="Blue" FontStyle="Oblique" FontWeight="Black" Margin="0,0,-1000,-340"/>
+        </Grid>
+        <!--
+        this grid will show the results of the game once it's finished
+        -->
+        <Grid Name="GameResultsGrid" Visibility="Collapsed" Margin="0,0,0,0">
+            <!--
+            this is the textBlock that shows the waiting message if not all players have finished
+            -->
+            <TextBlock Visibility="Visible" Name="waitingForAllPlayersToFinishHolder" Margin="0,0,50,150" Text="Game is not&#10;Finished!&#10;&#10;&#10;Waiting for all players to finish their game" Width="700" Height="700" FontSize="55" FontWeight="Black" Foreground="Blue" TextWrapping="Wrap" TextAlignment="Center" FontStyle="Oblique"/>
+           <!--
+            this button is to return to the main menu
+            -->
+            <Button Name="LaveGameResultsButton" Visibility="Visible" Width="180" Height="70" Background="Transparent" BorderBrush="Transparent" Margin="0,0,820,630" Click="ReturnToMenu">
+                <Image Name="LeaveGameResultsImage" Source="Assets/returnToMenu.png" Stretch="Fill"/>
+            </Button>
+            <!--
+            these blocks represent the pillars of the podium, that shows the first 3 players to win, and their score
+            -->
+            <TextBlock Visibility="Collapsed" Name="ThirdPlacePodium" Margin="700,530,0,0" Width="210" Height="200" Text="Score:&#10;" FontSize="30" Background="#CD7F32" TextAlignment="Center" FontStyle="Oblique" Foreground="Blue" FontWeight="Black"/>
+            <TextBlock Visibility="Collapsed" Name="SecondPlacePodium" Margin="-780,430,0,0" Width="210" Height="400" Text="Score:&#10;" FontSize="30" Background="#C3C7C7" TextAlignment="Center" FontStyle="Oblique" Foreground="Blue" FontWeight="Black"/>
+            <TextBlock Visibility="Collapsed" Name="FirstPlacePodium" Margin="-50,330,0,0" Width="210" Height="600" Text="Score:&#10;" FontSize="30" Background="#FFD700" TextAlignment="Center" FontStyle="Oblique" Foreground="Blue" FontWeight="Black"/>
+            <TextBlock Visibility="Collapsed" Name="ThirdPlacePodiumIndiCator" Margin="700,80,0,0" Width="105" Height="70" Text="3rd" FontSize="50" TextAlignment="Center" FontStyle="Oblique" Foreground="#CD7F32" FontWeight="Black"/>
+            <TextBlock Visibility="Collapsed" Name="SecondPlacePodiumIndiCator" Margin="-780,-100,0,0" Width="105" Height="70" Text="2nd" FontSize="50" TextAlignment="Center" FontStyle="Oblique" Foreground="#C3C7C7" FontWeight="Black"/>
+            <TextBlock Visibility="Collapsed" Name="FirstPlacePodiumIndiCator" Margin="-50,-280,0,0" Width="105" Height="70" Text="1st" FontSize="50" TextAlignment="Center" FontStyle="Oblique" Foreground="#FFD700" FontWeight="Black"/>
+            <TextBlock Visibility="Collapsed" Name="ThirdPlacePodiumName" Margin="700,250,0,0" Width="355" Height="45" TextWrapping="Wrap" Text="" FontSize="35" TextAlignment="Center" FontStyle="Oblique" Foreground="Blue" FontWeight="Black"/>
+            <TextBlock Visibility="Collapsed" Name="SecondPlacePodiumName" Margin="-780,60,0,0" Width="355" Height="45" TextWrapping="Wrap" Text="" FontSize="35" TextAlignment="Center" FontStyle="Oblique" Foreground="Blue" FontWeight="Black"/>
+            <TextBlock Visibility="Collapsed" Name="FirstPlacePodiumName" Margin="-50,-140,0,0" Width="355" Height="45" TextWrapping="Wrap" Text="" FontSize="35" TextAlignment="Center" FontStyle="Oblique" Foreground="Blue" FontWeight="Black"/>
+
+        </Grid>
+
+
+
+
+
+    </Grid>
+</Window>
